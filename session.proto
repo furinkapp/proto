@@ -1,3 +1,0 @@
-// This package defines protocol used for communicating session information between
-// Redis and the backend web API.
-package session;

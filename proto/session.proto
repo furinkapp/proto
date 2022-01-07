@@ -1,0 +1,25 @@
+// This package defines protocol used for communicating session information between
+// Redis and the backend web API.
+syntax = "proto3";
+package furink.session;
+
+import "google/protobuf/empty.proto";
+
+message SetKeyValueRequest {
+	string key = 1;
+  	string value = 2;
+}
+
+message GetKeyValueRequest {
+	string key = 1;
+}
+
+message GetKeyValueResponse {
+	string key = 1;
+	string value = 2;
+}
+
+service KeyValueStore {
+	rpc SetKeyValue(SetKeyValueRequest) returns (google.protobuf.Empty);
+	rpc GetKeyValue(GetKeyValueRequest) returns (GetKeyValueResponse);
+}
