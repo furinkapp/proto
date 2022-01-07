@@ -1,3 +1,0 @@
-# ignore all generated typescript
-*.ts
-!index.ts
