@@ -2,4 +2,5 @@ syntax = "proto3";
 package furink;
 
 import public "users.proto";
+import public "posts.proto";
 import public "session.proto";
