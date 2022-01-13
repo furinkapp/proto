@@ -1,0 +1,75 @@
+syntax = "proto3";
+package furink.users;
+
+message User {
+	bytes id = 1;
+	string username = 2;
+	string email = 3;
+}
+
+message GetUserRequest {
+	bytes id = 1;
+}
+
+message GetUserResponse {
+	optional User user = 1;
+}
+
+message CreateUserRequest {
+	string username = 1;
+	string email = 2;
+}
+
+message UpdateUserRequest {
+	optional string username = 1;
+	optional string email = 2;
+}
+
+message DeleteUserRequest {
+	bytes id = 1;
+}
+
+message DeleteUserResponse {
+	bytes id = 1;
+	bool success = 2;
+}
+
+service UserService {
+	rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+  	rpc CreateUser(CreateUserRequest) returns (User) {}
+  	rpc UpdateUser(UpdateUserRequest) returns (User) {}
+  	rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
+}
+
+message Profile {
+	bytes id = 1;
+	string username = 2;
+	string displayname = 3;
+	string bio = 4;
+	string avatar = 5;
+	string cover = 6;
+	string location = 7;
+	uint64 birthday = 8;
+}
+
+message GetProfileRequest {
+	bytes id = 1;
+}
+
+message GetProfileResponse {
+	Profile profile = 1;
+}
+
+message UpdateProfileRequest {
+	string displayname = 1;
+	string bio = 2;
+	string avatar = 3;
+	string cover = 4;
+	string location = 5;
+	uint64 birthday = 6;
+}
+
+service ProfileService {
+	rpc GetProfile(GetProfileRequest) returns (GetProfileResponse) {}
+	rpc UpdateProfile(UpdateProfileRequest) returns (Profile) {}
+}

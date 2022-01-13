@@ -1,3 +1,0 @@
-// Protocol definition for database service.
-syntax = "proto3";
-package furink.database;

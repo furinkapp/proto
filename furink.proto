@@ -1,5 +1,5 @@
 syntax = "proto3";
 package furink;
 
-import public "database.proto";
+import public "users.proto";
 import public "session.proto";
