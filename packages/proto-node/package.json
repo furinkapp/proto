@@ -1,0 +1,22 @@
+{
+	"name": "@furink/proto",
+	"version": "1.0.0",
+	"main": "dist/index",
+	"license": "MIT",
+	"scripts": {
+		"generate": "proto-loader-gen-types --longs=String --enums=String --defaults --oneofs --grpcLib=@grpc/grpc-js --outDir=src/ proto/*.proto && tsc",
+		"prepare": "yarn generate"
+	},
+	"dependencies": {
+		"@grpc/grpc-js": "^1.4.4",
+		"@grpc/proto-loader": "^0.6.7"
+	},
+	"devDependencies": {
+		"@types/node": "^17.0.8",
+		"@typescript-eslint/eslint-plugin": "^5.9.0",
+		"@typescript-eslint/parser": "^5.9.0",
+		"eslint": "^8.6.0",
+		"prettier": "^2.5.1",
+		"typescript": "^4.5.4"
+	}
+}
