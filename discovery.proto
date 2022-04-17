@@ -1,0 +1,45 @@
+syntax = "proto3";
+package furink.discovery;
+
+// Enumeration of service kinds.
+enum ServiceKind {
+	GATEWAY = 0;
+	DATABASE = 1;
+	MEDUSA = 2;
+	TYPESENSE = 3;
+	REDIS = 4;
+}
+
+// Request payload sent to the service discovery server.
+message RegisterRequest {
+	ServiceKind kind = 3;
+	string address = 1;
+	uint32 port = 2;
+}
+
+// Response payload containing the number of registered services of the kind
+// specified in the request.
+message RegisterResponse {
+	int64 count = 1;	
+}
+
+// Request payload sent to the service discovery server when looking up a list of
+// services.
+message LookupRequest {
+	ServiceKind kind = 1;
+}
+
+// Response payload containing a list of registered services of the kind specified
+// in the request.
+message LookupResponse {
+	message LookupPayload {
+		string address = 1;
+		uint32 port = 2;
+	}
+	repeated LookupPayload services = 1;
+}
+
+service DiscoveryService {
+	rpc Register(RegisterRequest) returns (RegisterResponse);
+	rpc Lookup(LookupRequest) returns (LookupResponse);
+}
