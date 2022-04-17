@@ -3,6 +3,8 @@
 syntax = "proto3";
 package furink.session;
 
+option go_package = "github.com/furinkapp/proto-go/session";
+
 import "google/protobuf/empty.proto";
 
 message SetKeyValueRequest {
