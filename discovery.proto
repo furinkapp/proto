@@ -12,34 +12,56 @@ enum ServiceKind {
 
 // Request payload sent to the service discovery server.
 message RegisterRequest {
+	// The kind of service being registered.
 	ServiceKind kind = 3;
+	// The address of the service.
 	string address = 1;
+	// The port of the gRPC service.
 	uint32 port = 2;
 }
 
 // Response payload containing the number of registered services of the kind
 // specified in the request.
 message RegisterResponse {
-	int64 count = 1;	
+	// The unique ID of this service.
+	string id = 1;
+	// The number of services of the specified kind.
+	int64 count = 2;	
 }
 
 // Request payload sent to the service discovery server when looking up a list of
 // services.
 message LookupRequest {
+	// The kind of service being looked up.
 	ServiceKind kind = 1;
 }
 
 // Response payload containing a list of registered services of the kind specified
 // in the request.
 message LookupResponse {
+	// An entry in the list of services.
 	message LookupPayload {
+		// The address of this service.
 		string address = 1;
+		// The port of the gRPC service.
 		uint32 port = 2;
 	}
+	// The list of services.
 	repeated LookupPayload services = 1;
 }
 
+// The heartbeat message sent to the service discovery server.
+message HeartbeatPayload {
+	// THe ID of the service heartbeating.
+	string id = 1;
+}
+
+// Handles the registration and lookup of services.
 service DiscoveryService {
+	// Register a service.
 	rpc Register(RegisterRequest) returns (RegisterResponse);
+	// Lookup a list of services.
 	rpc Lookup(LookupRequest) returns (LookupResponse);
+	// Send a heartbeat message to the service discovery server.
+	rpc Heartbeat(HeartbeatPayload) returns (HeartbeatPayload);
 }
