@@ -1,0 +1,45 @@
+syntax = "proto3";
+package furink.cache;
+
+// The payload of a cache set entry, containing the key and the value the client
+// wants to store in the cache.
+message SetRequest {
+	string key = 1;
+	string value = 2;
+	// The time to live of the entry in seconds. Optional.
+	optional uint64 ttl = 3;
+}
+
+// A mirror of the SetRequest message, containing the key and the value the client
+// has stored in the cache.
+message SetResponse {
+	string key = 1;
+	string value = 2;
+}
+
+// A request to retrieve a value from the cache.
+message GetRequest {
+	string key = 1;
+}
+
+// A mirror of the GetRequest message, containing the value the client has
+message GetResponse {
+	string key = 1;
+	string value = 2;
+}
+
+// A request to delete a value from the cache.
+message DeleteRequest {
+	string key = 1;
+}
+
+// Response to a DeleteRequest, mirrors the DeleteRequest message.
+message DeleteResponse {
+	string key = 1;
+}
+
+service CacheService {
+	rpc Set(SetRequest) returns (SetResponse);
+	rpc Get(GetRequest) returns (GetResponse);
+	rpc Delete(DeleteRequest) returns (DeleteResponse);
+}
